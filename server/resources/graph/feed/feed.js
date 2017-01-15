@@ -59,7 +59,6 @@ export class FeedResource extends ResourceAbstract {
                 response.data.data[i].object_id = objectId;
                 response.data.data[i].image_url = this.getImageUrl(objectId);
             }
-            console.log(response.data.data[i]);
         }
         return response;
     }
@@ -75,13 +74,20 @@ export class FeedResource extends ResourceAbstract {
             if (typeof response.data.data[i].id === "undefined") {
                 continue ;
             }
-            Feed.insert({
-                id: response.data.data[i].id,
+            var feed = {
+                feed_id: response.data.data[i].id,
                 message: response.data.data[i].message,
                 created_time: response.data.data[i].created_time,
                 object_id: response.data.data[i].object_id,
                 image_url: response.data.data[i].image_url
-            });
+            };
+            console.log(feed);
+            try {
+                Feed.insert(feed);
+            } catch (e) {
+                console.error(e.message);
+                return response;
+            }
         }
         return response;
     }
