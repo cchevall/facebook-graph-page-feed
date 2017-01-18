@@ -12,19 +12,8 @@ export class FeedResource extends ResourceAbstract {
 
     constructor() {
         super();
-        this.initPictureSize();
         this.initFacebookPage();
         this.buildRoute("feed");
-    }
-
-    /**
-     * initPictureSize
-     * sets default values for images urls
-     */
-    initPictureSize() {
-        this.width = 9999;
-        this.height = 9999;
-        this.type = "normal";
     }
 
     /**
@@ -111,6 +100,6 @@ export class FeedResource extends ResourceAbstract {
      * @return {[string]} image url
      */
     getImageUrl(objectId) {
-        return this.domain + objectId + "/picture?type=" + this.type + "&" + "width=" + this.width +"&height=" + this.height;
+        return this.domain + objectId + "/picture";
     }
 }

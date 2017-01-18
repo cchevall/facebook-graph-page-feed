@@ -1,6 +1,5 @@
 "use strict";
 
-import SimpleSchema from 'simpl-schema';
 import { MongoCollection as Feed } from "./feed.js";
 
 /**
@@ -13,6 +12,7 @@ var FeedSchemas = {};
 FeedSchemas.feed = new SimpleSchema({
     feed_id : {
         type: String,
+        unique: true,
         label: "feed_id",
         optional: false
     },
