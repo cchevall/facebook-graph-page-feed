@@ -43,4 +43,4 @@ FeedSchemas.feed = new SimpleSchema({
     }
 });
 
-// Feed.attachSchema( FeedSchemas.feed );
+Feed.attachSchema( FeedSchemas.feed );

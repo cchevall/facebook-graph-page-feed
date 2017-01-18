@@ -81,13 +81,7 @@ export class FeedResource extends ResourceAbstract {
                 object_id: response.data.data[i].object_id,
                 image_url: response.data.data[i].image_url
             };
-            console.log(feed);
-            try {
-                Feed.insert(feed);
-            } catch (e) {
-                console.error(e.message);
-                return response;
-            }
+            Feed.insert(feed);
         }
         return response;
     }
