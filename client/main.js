@@ -1,5 +1,14 @@
 "use strict";
 
-console.log("HELLO CLIENT");
+import { MongoCollection } from "../imports/collections/graph-api/feed/feed.js";
+import { FetchAllFeedAlias } from "../imports/collections/graph-api/feed/publication-methods/fetch-all-feed.js";
 
-export const name = "Facebook Graph Page Feed CLIENT";
+export const FacebookPageFeed = {
+
+    collection : MongoCollection,
+
+    subscribe : function () {
+
+        Meteor.subscribe(FetchAllFeedAlias);
+    }
+}

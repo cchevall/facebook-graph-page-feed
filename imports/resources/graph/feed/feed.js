@@ -2,7 +2,7 @@
 
 import { ResourceAbstract } from "../../ResourceAbstract.js";
 import { ObjectIdResource } from "../object-id/object-id.js";
-import { MongoCollection as Feed } from "../../../../imports/collections/graph-api/feed/feed.js";
+import { MongoCollection as Feed } from "meteor/cchevallay:facebook-graph-page-feed/imports/collections/graph-api/feed/feed.js";
 
 /**
  * FeedResource

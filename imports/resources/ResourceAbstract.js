@@ -1,7 +1,7 @@
 "use strict";
 
 import { HTTP } from 'meteor/http';
-import { SettingsException } from "../../imports/exceptions/SettingsException.js";
+import { SettingsException } from "meteor/cchevallay:facebook-graph-page-feed/imports/exceptions/SettingsException.js";
 
 export class ResourceAbstract {
 
