@@ -7,8 +7,10 @@ export const FacebookPageFeed = {
 
     collection : MongoCollection,
 
+    fetchAllFeedAlias : FetchAllFeedAlias,
+
     subscribe : function () {
 
-        Meteor.subscribe(FetchAllFeedAlias);
+        return Meteor.subscribe(FetchAllFeedAlias);
     }
 }
