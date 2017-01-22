@@ -9,8 +9,8 @@ export const FacebookPageFeed = {
 
     fetchAllFeedAlias : FetchAllFeedAlias,
 
-    subscribe : function () {
+    subscribe : function (options = {}) {
 
-        return Meteor.subscribe(FetchAllFeedAlias);
+        return Meteor.subscribe(FetchAllFeedAlias, options);
     }
 }

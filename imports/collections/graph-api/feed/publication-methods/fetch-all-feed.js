@@ -19,10 +19,11 @@ export const FetchAllFeedAlias = CollectionName + "FetchAllFeed";
 /**
  * FetchAllFeedMethod
  */
-export var FetchAllFeedMethod = function () {
+export var FetchAllFeedMethod = function (options = {}) {
 
-    var data = MongoCollection.find({});
-    Meteor.defer(updateFeed);
+    options.sort = typeof options.sort !== "undefined" ? options.sort : [["created_time", "desc"]];
+    var data = MongoCollection.find({}, options);
+    // Meteor.defer(updateFeed);
     if (data) {
         return data;
     }

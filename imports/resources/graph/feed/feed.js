@@ -2,6 +2,10 @@
 
 import { ResourceAbstract } from "../../ResourceAbstract.js";
 import { ObjectIdResource } from "../object-id/object-id.js";
+import { LinkResource } from "../link/link.js";
+import { EventResource } from "../event/event.js";
+import { PhotoResource } from "../photo/photo.js";
+import { VideoResource } from "../video/video.js";
 import { MongoCollection as Feed } from "meteor/cchevallay:facebook-graph-page-feed/imports/collections/graph-api/feed/feed.js";
 
 /**
@@ -11,7 +15,21 @@ import { MongoCollection as Feed } from "meteor/cchevallay:facebook-graph-page-f
 export class FeedResource extends ResourceAbstract {
 
     constructor() {
-        super();
+        var params = {
+            fields: [
+                "type",
+                "story",
+                "message",
+                "created_time"
+            ]
+        };
+        super(params);
+        this.fetchMethods = {
+            event: this.fetchEvent,
+            photo: this.fetchPhoto,
+            video: this.fetchVideo,
+            link: this.fetchLink
+        };
         this.initFacebookPage();
         this.buildRoute("feed");
     }
@@ -48,8 +66,60 @@ export class FeedResource extends ResourceAbstract {
                 response.data.data[i].object_id = objectId;
                 response.data.data[i].image_url = this.getImageUrl(objectId);
             }
+            if (typeof this.fetchMethods[response.data.data[i].type] === "undefined") {
+                continue ;
+            }
+            response.data.data[i][response.data.data[i].type + "Resource"] = this.fetchMethods[response.data.data[i].type](response.data.data[i].id);
         }
         return response;
+    }
+
+    fetchLink(id) {
+        var linkResource = new LinkResource(id);
+        var link = linkResource.fetchAll();
+        if (typeof link.data.likes.data !== "Object") {
+            link.data.likes.data = {};
+        }
+        if (typeof link.data.comments.data !== "Object") {
+            link.data.comments.data = {};
+        }
+        return link.data || null;
+    }
+
+    fetchPhoto(id) {
+        var photoResource = new PhotoResource(id);
+        var photo = photoResource.fetchAll();
+        if (typeof photo.data.likes.data !== "Object") {
+            photo.data.likes.data = {};
+        }
+        if (typeof photo.data.comments.data !== "Object") {
+            photo.data.comments.data = {};
+        }
+        return photo.data || null;
+    }
+
+    fetchVideo(id) {
+        var videoResource = new VideoResource(id);
+        var video = videoResource.fetchAll();
+        if (typeof video.data.likes.data !== "Object") {
+            video.data.likes.data = {};
+        }
+        if (typeof video.data.comments.data !== "Object") {
+            video.data.comments.data = {};
+        }
+        return video.data || null;
+    }
+
+    fetchEvent(id) {
+        var eventResource = new EventResource(id);
+        var event = eventResource.fetchAll();
+        if (typeof event.data.likes.data !== "Object") {
+            event.data.likes.data = {};
+        }
+        if (typeof event.data.comments.data !== "Object") {
+            event.data.comments.data = {};
+        }
+        return event.data || null;
     }
 
     /**
@@ -65,9 +135,11 @@ export class FeedResource extends ResourceAbstract {
             }
             var feed = {
                 feed_id: response.data.data[i].id,
+                type: response.data.data[i].type,
                 created_time: response.data.data[i].created_time,
                 object_id: response.data.data[i].object_id
             };
+            feed[feed.type + "Resource"] = response.data.data[i][feed.type + "Resource"];
             if (typeof response.data.data[i].story !== "undefined") {
                 feed.story = response.data.data[i].story;
             }
