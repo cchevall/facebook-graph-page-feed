@@ -96,14 +96,10 @@ export class ResourceAbstract {
      * @param  {Number} page count [pagination limit] optional
      */
     fetchAllHalCollection(limit = 10) {
-        try {
-            this.fetchAll();
-            while (typeof this.responsePaging !== "undefined" && limit !== 0) {
-                this.paginateNext();
-                limit--;
-            }
-        } catch (e) {
-            return ;
+        this.fetchAll();
+        while (typeof this.responsePaging !== "undefined" && limit !== 0) {
+            this.paginateNext();
+            limit--;
         }
     }
 
