@@ -2,7 +2,6 @@
 
 import { HTTP } from 'meteor/http';
 import { SettingsException } from "meteor/cchevallay:facebook-graph-page-feed/imports/exceptions/SettingsException.js";
-import { MongoCollection as Feed } from "meteor/cchevallay:facebook-graph-page-feed/imports/collections/graph-api/feed/feed.js";
 
 export class ResourceAbstract {
 

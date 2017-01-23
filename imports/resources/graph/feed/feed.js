@@ -1,6 +1,5 @@
 "use strict";
 
-import { FetchException } from "meteor/cchevallay:facebook-graph-page-feed/imports/exceptions/FetchException.js";
 import { ResourceAbstract } from "../../ResourceAbstract.js";
 import { ObjectIdResource } from "../object-id/object-id.js";
 import { StatusResource } from "../status/status.js";
@@ -193,7 +192,7 @@ export class FeedResource extends ResourceAbstract {
             var feed = this.formatFeed( response.data.data[i] )
             try {
                 Feed.insert(feed);
-            } catch (e) { console.warning ( e.message ) }
+            } catch (e) { console.error( e.message ) }
         }
         return response;
     }
