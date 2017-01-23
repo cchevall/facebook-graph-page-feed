@@ -27,3 +27,8 @@
     float: left;
     margin-right: 20px;
 }
+
+#facebook-feed ul {
+  list-style-type: none;
+  margin-left: -40px;
+}
