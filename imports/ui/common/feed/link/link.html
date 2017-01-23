@@ -1,0 +1,14 @@
+<template name="linkFeed">
+    <div class="linkFeed row">
+        <p class="pre">{{ linkResource.message }}</p>
+        <div>
+            <a target="_blank" href="{{ linkResource.link }}">
+                <img src="{{ linkResource.picture }}"/>
+            </a>
+            <p><a target="_blank" href="{{ linkResource.link }}">{{ linkResource.name }}</a></p>
+            <p>{{ linkResource.description }}</p>
+        </div>
+        <p>{{ feedDateFormat created_time }}</p>
+    </div>
+    {{> socialFeed resource=linkResource }}
+</template>

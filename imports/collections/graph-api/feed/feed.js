@@ -25,5 +25,4 @@ if (Meteor.isServer) {
  */
 Meteor.startup( function() {
     import "./feed.rule.js";
-    // import "./feed.schema.js";
 });

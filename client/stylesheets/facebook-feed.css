@@ -1,0 +1,29 @@
+
+#facebook-feed article {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 30px 50px 30px 50px;
+    margin-bottom: 20px;
+}
+
+#facebook-feed article .pre {
+    white-space: pre-line;
+}
+
+#facebook-feed article .socialFeed {
+    margin-top: 10px;
+}
+
+#facebook-feed article .socialFeed .feed-meta li {
+    float: left;
+    margin-right: 15px;
+}
+
+#facebook-feed article .socialFeed .feed-meta a {
+    font-size: 1.4rem;
+}
+
+#facebook-feed article .linkFeed img {
+    float: left;
+    margin-right: 20px;
+}

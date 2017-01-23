@@ -1,0 +1,20 @@
+<template name="eventFeed">
+    <div class="eventFeed row">
+        {{ #if story }}
+            <p>{{ story }}</p>
+        {{ /if }}
+        {{ #if message }}
+            <p class="pre" >{{ message }}</p>
+        {{ /if }}
+        <p>{{ feedDateFormat created_time }}</p>
+        <a target="_blank" href="{{ eventResource.link }}">
+            <img alt="{{ #if eventResource.name }}{{ eventResource.name }}{{ /if }}" title="{{ #if story }}{{ story }}{{ /if }}{{ #if message }}{{ message }}{{ /if }}" src="{{ image_url }}"/>
+        </a>
+        {{ #if eventResource.place }}
+        <p>
+            {{ formatPlace eventResource.place }}
+        </p>
+        {{ /if }}
+        {{> socialFeed resource=eventResource }}
+    </div>
+</template>

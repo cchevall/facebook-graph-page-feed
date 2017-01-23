@@ -1,6 +1,6 @@
 Package.describe({
   name: 'cchevallay:facebook-graph-page-feed',
-  version: '0.0.17',
+  version: '0.0.19',
   summary: './README.md',
   git: 'https://github.com/cchevall/facebook-graph-page-feed.git',
   documentation: 'README.md'
@@ -10,6 +10,10 @@ Package.onUse(function(api) {
   api.versionsFrom('1.4.2.3');
   api.use('ecmascript');
   api.use('templating', 'client');
+  api.use('session', 'client');
+  api.use('kadira:blaze-layout', 'client');
+  api.use('kadira:flow-router', 'client');
+  api.use('twbs:bootstrap', 'client');
   api.use("aldeed:collection2@2.10.0");
   api.use('http');
   api.mainModule('./client/main.js', 'client');

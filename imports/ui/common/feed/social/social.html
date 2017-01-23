@@ -1,0 +1,34 @@
+<template name="socialFeed">
+    <div class="socialFeed row">
+        <ul class="feed-meta light">
+            <li class="cf-likes">
+                <a target="_blank" href="{{ resource.link }}"><span class="glyphicon glyphicon-thumbs-up"></span>
+                {{ #if resource.likes.summary.total_count }}
+                    <span class="feed-count">{{ resource.likes.summary.total_count }}</span>
+                {{ else }}
+                    <span class="feed-count">0</span>
+                {{ /if }}
+                </a>
+            </li>
+            <li class="cf-shares">
+                <a target="_blank" href="{{ resource.link }}"><span class="glyphicon glyphicon-share"></span>
+                {{ #if resource.shares.count }}
+                    <span class="feed-count">{{ resource.shares.count }}</span>
+                {{ else }}
+                    <span class="feed-count">0</span>
+                {{ /if }}
+                </a>
+            </li>
+            <li class="feed-comments">
+                <a target="_blank" href="{{ resource.link }}">
+                    <span class="glyphicon glyphicon-comment"></span>
+                {{ #if resource.comments.summary.total_count }}
+                    <span class="feed-count">{{ resource.comments.summary.total_count }}</span>
+                {{ else }}
+                    <span class="feed-count">0</span>
+                {{ /if }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</template>

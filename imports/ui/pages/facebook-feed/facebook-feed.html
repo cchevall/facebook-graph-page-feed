@@ -1,0 +1,28 @@
+<template name="facebookFeed">
+    <div id="facebook-feed" class="col-md-12">
+    {{ #each fetchAllFeed }}
+        <article id="{{ feed_id }}" class="fecebook-feed">
+            {{ #if isPhoto type }}
+                {{> photoFeed }}
+            {{/if}}
+            {{ #if isVideo type }}
+                {{> videoFeed }}
+            {{/if}}
+            {{ #if isLink type }}
+                {{> linkFeed }}
+            {{/if}}
+            {{ #if isStatus type }}
+                {{> statusFeed }}
+            {{/if}}
+            {{ #if isEvent type }}
+                {{> eventFeed }}
+            {{/if}}
+        </article>
+    {{ /each }}
+    {{#if moreResults}}
+        <div id="showMoreResults" style="margin-left: 25px;">
+            <span class="loading">Loading...</span>
+        </div>
+    {{/if}}
+    </div>
+</template>
