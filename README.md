@@ -5,12 +5,12 @@ settings.json exemple:
 {
     "public" : {
         "facebook-graph-page-feed" : {
-            "fetch-limit" : 5,                                  //optional
             "use-default-client-feed" : true,                   //optional
             "facebook-feed-route" : "/my-feed-route"            //optional
         }
     },
     "facebook-graph-page-feed" : {
+        "fetch-limit" : 5,                                      //optional
         "facebook-api-domain" : "https://graph.facebook.com/",
         "facebook-api-version" : "2.8",
         "facebook-page-id" : "facebookPageId",
