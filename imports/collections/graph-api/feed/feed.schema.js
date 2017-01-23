@@ -12,13 +12,11 @@ var FeedSchemas = {};
 FeedSchemas.data = new SimpleSchema({
     id: {
         type: String,
-        unique: false,
         label: "id",
         optional: true
     },
     name: {
         type: String,
-        unique: false,
         label: "name",
         optional: true
     }
@@ -27,31 +25,26 @@ FeedSchemas.data = new SimpleSchema({
 FeedSchemas.summary = new SimpleSchema({
     total_count: {
         type: SimpleSchema.Integer,
-        unique: false,
         label: "count",
         optional: true
     },
     can_like: {
         type: Boolean,
-        unique: false,
         label: "can_like",
         optional: true
     },
     can_comment: {
         type: Boolean,
-        unique: false,
         label: "can_comment",
         optional: true
     },
     order: {
         type: String,
-        unique: false,
         label: "order",
         optional: true
     },
     has_liked: {
         type: Boolean,
-        unique: false,
         label: "has_liked",
         optional: true
     }
@@ -95,37 +88,31 @@ FeedSchemas.link = new SimpleSchema({
     },
     description: {
         type: String,
-        unique: false,
         label: "description",
         optional: true
     },
     from: {
         type: Object,
-        unique: false,
         label: "from",
         optional: true
     },
     link: {
         type: String,
-        unique: false,
         label: "link",
         optional: false
     },
     message: {
         type: String,
-        unique: false,
         label: "message",
         optional: true
     },
     name: {
         type: String,
-        unique: false,
         label: "name",
         optional: true
     },
     picture: {
         type: String,
-        unique: false,
         label: "picture",
         optional: true
     },
@@ -156,7 +143,6 @@ FeedSchemas.status = new SimpleSchema({
     },
     name: {
         type: String,
-        unique: false,
         label: "name",
         optional: true
     },
@@ -177,19 +163,16 @@ FeedSchemas.status = new SimpleSchema({
 FeedSchemas.event = new SimpleSchema({
     description: {
         type: String,
-        unique: false,
         label: "description",
         optional: true
     },
     name: {
         type: String,
-        unique: false,
         label: "name",
         optional: true
     },
     link: {
         type: String,
-        unique: false,
         label: "link",
         optional: false
     },
@@ -215,19 +198,16 @@ FeedSchemas.photo = new SimpleSchema({
     },
     link: {
         type: String,
-        unique: false,
         label: "link",
         optional: false
     },
     name: {
         type: String,
-        unique: false,
         label: "name",
         optional: true
     },
     location: {
         type: String,
-        unique: false,
         label: "name",
         optional: true
     },
@@ -253,19 +233,16 @@ FeedSchemas.video = new SimpleSchema({
     },
     description: {
         type: String,
-        unique: false,
         label: "description",
         optional: true
     },
     from: {
         type: Object,
-        unique: false,
         label: "from",
         optional: true
     },
     source: {
         type: String,
-        unique: false,
         label: "source",
         optional: true
     },

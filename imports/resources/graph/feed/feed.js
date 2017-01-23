@@ -179,36 +179,58 @@ export class FeedResource extends ResourceAbstract {
      */
     saveResponse(response) {
         response = super.saveResponse(response);
+        if (this.continueToFetch === false) {
+            return response;
+        }
         for (var i = response.data.data.length - 1; i >= 0; i--) {
-            if (typeof response.data.data[i].id === "undefined") {
+            if ( typeof response.data.data[i].id === "undefined" ) {
                 continue ;
             }
-            var feed = {
-                feed_id: response.data.data[i].id,
-                type: response.data.data[i].type,
-                created_time: response.data.data[i].created_time,
-                object_id: response.data.data[i].object_id
-            };
-            feed[feed.type + "Resource"] = response.data.data[i][feed.type + "Resource"];
-            if (typeof response.data.data[i].story !== "undefined") {
-                feed.story = response.data.data[i].story;
+            if ( this.isUnique( response.data.data[i].id ) === false ) {
+                this.continueToFetch = false;
+                return response ;
             }
-            if (typeof response.data.data[i].message !== "undefined") {
-                feed.message = response.data.data[i].message;
-            }
-            if (typeof response.data.data[i].image_url !== "undefined") {
-                feed.image_url = response.data.data[i].image_url;
-            }
+            var feed = this.formatFeed( response.data.data[i] )
             try {
                 Feed.insert(feed);
-            } catch (e) {
-                if ( e.code === 11000 ) {
-                    this.continueToFetch = false;
-                    return response;
-                }
-            }
+            } catch (e) { console.warning ( e.message ) }
         }
         return response;
+    }
+
+    /**
+     * formatFeed
+     * @param  {Object} feed
+     * @return {Object}
+     */
+    formatFeed( feed ) {
+        var format = {
+            feed_id: feed.id,
+            type: feed.type,
+            created_time: feed.created_time,
+            object_id: feed.object_id
+        };
+        format[format.type + "Resource"] = feed[format.type + "Resource"];
+        if (typeof feed.story !== "undefined") {
+            format.story = feed.story;
+        }
+        if (typeof feed.message !== "undefined") {
+            format.message = feed.message;
+        }
+        if (typeof feed.image_url !== "undefined") {
+            format.image_url = feed.image_url;
+        }
+        return format;
+    }
+
+    /**
+     * isUnique
+     * ensure feed_id is unique
+     * @param  {String}  id
+     * @return {Boolean}
+     */
+    isUnique( id ) {
+        return (typeof Feed.findOne({feed_id: id}) === "undefined");
     }
 
     /**

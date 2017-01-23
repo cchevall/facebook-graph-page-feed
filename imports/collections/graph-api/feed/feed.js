@@ -14,6 +14,10 @@ export const CollectionName = "facebook:graph:feed";
  */
 export const MongoCollection = new Meteor.Collection( CollectionName );
 
+if (Meteor.isServer) {
+
+    MongoCollection._ensureIndex({ feed_id: 1 }, { unique: true });
+}
 /**
  * Load rules and schema
  * @param  {callback}
@@ -21,5 +25,5 @@ export const MongoCollection = new Meteor.Collection( CollectionName );
  */
 Meteor.startup( function() {
     import "./feed.rule.js";
-    import "./feed.schema.js";
+    // import "./feed.schema.js";
 });
