@@ -1,6 +1,6 @@
 "use strict";
 
-import { FacebookPageFeed } from "meteor/cchevallay:facebook-graph-page-feed";
+import { FetchAllFeedAlias } from "meteor/cchevallay:facebook-graph-page-feed/imports/collections/graph-api/feed/publication-methods/fetch-all-feed.js";
 
 Session.set('FacebookFeedLimit', 1);
 
@@ -41,6 +41,6 @@ FlowRouter.route(route, {
     name: "facebookFeed",
     action: facebookFeed,
     subscriptions: function(params, queryParams) {
-        this.register( FacebookPageFeed.fetchAllFeedAlias, FacebookPageFeed.subscribe() );
+        this.register( FetchAllFeedAlias, Meteor.subscribe(FetchAllFeedAlias) );
     }
 });

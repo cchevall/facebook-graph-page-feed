@@ -40,5 +40,5 @@ var loadFacebookFeedPage = function () {
 
 if ( loadFacebookFeedPage() === true ) {
 
-    FacebookPageFeed.publish();
+    Meteor.publish(FetchAllFeedAlias, FetchAllFeedMethod);
 }
