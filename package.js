@@ -10,6 +10,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.4.2.3');
   api.use('ecmascript');
   api.use('templating@1.2.15', 'client');
+  api.use('momentjs:moment@2.17.1', 'client');
   api.use('session', 'client');
   api.use('kadira:blaze-layout@2.3.0', 'client');
   api.use('kadira:flow-router@2.12.1', 'client');
