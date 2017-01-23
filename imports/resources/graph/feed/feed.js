@@ -2,6 +2,7 @@
 
 import { ResourceAbstract } from "../../ResourceAbstract.js";
 import { ObjectIdResource } from "../object-id/object-id.js";
+import { StatusResource } from "../status/status.js";
 import { LinkResource } from "../link/link.js";
 import { EventResource } from "../event/event.js";
 import { PhotoResource } from "../photo/photo.js";
@@ -25,6 +26,7 @@ export class FeedResource extends ResourceAbstract {
         };
         super(params);
         this.fetchMethods = {
+            status: this.fetchStatus,
             event: this.fetchEvent,
             photo: this.fetchPhoto,
             video: this.fetchVideo,
@@ -72,6 +74,18 @@ export class FeedResource extends ResourceAbstract {
             response.data.data[i][response.data.data[i].type + "Resource"] = this.fetchMethods[response.data.data[i].type](response.data.data[i].id);
         }
         return response;
+    }
+
+    fetchStatus(id) {
+        var statusResource = new StatusResource(id);
+        var status = statusResource.fetchAll();
+        if (typeof status.data.likes.data !== "Object") {
+            status.data.likes.data = {};
+        }
+        if (typeof status.data.comments.data !== "Object") {
+            status.data.comments.data = {};
+        }
+        return status.data || null;
     }
 
     fetchLink(id) {

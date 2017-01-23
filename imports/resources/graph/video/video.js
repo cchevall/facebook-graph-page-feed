@@ -16,6 +16,7 @@ export class VideoResource extends ResourceAbstract {
                 "from",
                 "source",
                 "likes.summary(true)",
+                "shares.summary(true)",
                 "comments.summary(true)"
             ]
         };

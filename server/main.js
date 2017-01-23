@@ -5,7 +5,7 @@ import { FetchAllFeedAlias, FetchAllFeedMethod } from "../imports/collections/gr
 import { FeedResource } from "meteor/cchevallay:facebook-graph-page-feed/imports/resources/graph/feed/feed.js";
 
 // var feedResource = new FeedResource();
-// feedResource.fetchAllHalCollection(2);
+// feedResource.fetchAllHalCollection(1);
 
 export const FacebookPageFeed = {
 

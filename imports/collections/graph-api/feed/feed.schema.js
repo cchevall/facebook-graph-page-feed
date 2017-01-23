@@ -68,6 +68,14 @@ FeedSchemas.likes = new SimpleSchema({
     }
 });
 
+FeedSchemas.shares = new SimpleSchema({
+    count: {
+        type: SimpleSchema.Integer,
+        label: "shares",
+        optional: true
+    },
+});
+
 FeedSchemas.comments = new SimpleSchema({
     data: {
         type: FeedSchemas.data,
@@ -125,6 +133,41 @@ FeedSchemas.link = new SimpleSchema({
         type: FeedSchemas.likes,
         optional: true
     },
+    shares: {
+        type: FeedSchemas.shares,
+        optional: true
+    },
+    comments: {
+        type: FeedSchemas.comments,
+        optional: true
+    }
+});
+
+FeedSchemas.status = new SimpleSchema({
+    created_time: {
+        type: Date,
+        label: "created_time",
+        optional: false
+    },
+    message: {
+        type: String,
+        label: "message",
+        optional: true
+    },
+    name: {
+        type: String,
+        unique: false,
+        label: "name",
+        optional: true
+    },
+    likes: {
+        type: FeedSchemas.likes,
+        optional: true
+    },
+    shares: {
+        type: FeedSchemas.shares,
+        optional: true
+    },
     comments: {
         type: FeedSchemas.comments,
         optional: true
@@ -152,6 +195,10 @@ FeedSchemas.event = new SimpleSchema({
     },
     likes: {
         type: FeedSchemas.likes,
+        optional: true
+    },
+    shares: {
+        type: FeedSchemas.shares,
         optional: true
     },
     comments: {
@@ -188,6 +235,10 @@ FeedSchemas.photo = new SimpleSchema({
         type: FeedSchemas.likes,
         optional: true
     },
+    shares: {
+        type: FeedSchemas.shares,
+        optional: true
+    },
     comments: {
         type: FeedSchemas.comments,
         optional: true
@@ -220,6 +271,10 @@ FeedSchemas.video = new SimpleSchema({
     },
     likes: {
         type: FeedSchemas.likes,
+        optional: true
+    },
+    shares: {
+        type: FeedSchemas.shares,
         optional: true
     },
     comments: {
@@ -279,6 +334,10 @@ FeedSchemas.feed = new SimpleSchema({
     },
     videoResource: {
         type: FeedSchemas.video,
+        optional: true
+    },
+    statusResource: {
+        type: FeedSchemas.status,
         optional: true
     }
 });
