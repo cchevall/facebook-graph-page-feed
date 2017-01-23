@@ -67,7 +67,7 @@ export class FeedResource extends ResourceAbstract {
             var entity = Feed.findOne({feed_id: response.data.data[i].id});
             if (typeof entity !== "undefined") {
                 this.continueToFetch = false;
-                return response;
+                continue ;
             }
             var objectId = this.fetchObjectId(response.data.data[i].id);
             if (objectId !== null) {
