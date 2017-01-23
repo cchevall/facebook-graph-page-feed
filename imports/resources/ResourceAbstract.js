@@ -2,6 +2,7 @@
 
 import { HTTP } from 'meteor/http';
 import { SettingsException } from "meteor/cchevallay:facebook-graph-page-feed/imports/exceptions/SettingsException.js";
+import { MongoCollection as Feed } from "meteor/cchevallay:facebook-graph-page-feed/imports/collections/graph-api/feed/feed.js";
 
 export class ResourceAbstract {
 
@@ -13,6 +14,7 @@ export class ResourceAbstract {
         this.params = params;
         this.initSettings();
         this.initAccessToken();
+        this.continueToFetch = true;
     }
 
     /**
@@ -72,6 +74,9 @@ export class ResourceAbstract {
      * @return {object} [facebook graph api response]
      */
     fetchAll(route = null, params = null) {
+        if (this.continueToFetch === false) {
+            return {};
+        }
         if (route === null) {
             route = this.route;
         }
@@ -95,9 +100,9 @@ export class ResourceAbstract {
      * fetchAllHalCollection
      * @param  {Number} page count [pagination limit] optional
      */
-    fetchAllHalCollection(limit = 10) {
+    fetchAllHalCollection(limit = 1) {
         this.fetchAll();
-        while (typeof this.responsePaging !== "undefined" && limit !== 0) {
+        while (typeof this.responsePaging !== "undefined" && limit !== 0 && this.continueToFetch === true) {
             this.paginateNext();
             limit--;
         }

@@ -4,8 +4,12 @@ import { MongoCollection } from "../imports/collections/graph-api/feed/feed.js";
 import { FetchAllFeedAlias, FetchAllFeedMethod } from "../imports/collections/graph-api/feed/publication-methods/fetch-all-feed.js";
 import { FeedResource } from "meteor/cchevallay:facebook-graph-page-feed/imports/resources/graph/feed/feed.js";
 
-// var feedResource = new FeedResource();
-// feedResource.fetchAllHalCollection(1);
+var limit = 1;
+if (typeof Meteor.settings["facebook-graph-page-feed"]["fetch-limit"] !== "undefined") {
+    var limit = Meteor.settings["facebook-graph-page-feed"]["fetch-limit"];
+}
+var feedResource = new FeedResource();
+feedResource.fetchAllHalCollection(limit);
 
 export const FacebookPageFeed = {
 

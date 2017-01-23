@@ -1,5 +1,6 @@
 "use strict";
 
+import { FetchException } from "meteor/cchevallay:facebook-graph-page-feed/imports/exceptions/FetchException.js";
 import { ResourceAbstract } from "../../ResourceAbstract.js";
 import { ObjectIdResource } from "../object-id/object-id.js";
 import { StatusResource } from "../status/status.js";
@@ -63,6 +64,11 @@ export class FeedResource extends ResourceAbstract {
             if (typeof response.data.data[i].id === "undefined") {
                 continue ;
             }
+            var entity = Feed.findOne({feed_id: response.data.data[i].id});
+            if (typeof entity !== "undefined") {
+                this.continueToFetch = false;
+                return response;
+            }
             var objectId = this.fetchObjectId(response.data.data[i].id);
             if (objectId !== null) {
                 response.data.data[i].object_id = objectId;
@@ -76,6 +82,12 @@ export class FeedResource extends ResourceAbstract {
         return response;
     }
 
+    /**
+     * fetchStatus
+     * fetch status resource from graph
+     * @param  {[Int]} id
+     * @return {[Object|null]}
+     */
     fetchStatus(id) {
         var statusResource = new StatusResource(id);
         var status = statusResource.fetchAll();
@@ -88,6 +100,12 @@ export class FeedResource extends ResourceAbstract {
         return status.data || null;
     }
 
+    /**
+     * fetchLink
+     * fetch link resource from graph
+     * @param  {[Int]} id
+     * @return {[Object|null]}
+     */
     fetchLink(id) {
         var linkResource = new LinkResource(id);
         var link = linkResource.fetchAll();
@@ -100,6 +118,12 @@ export class FeedResource extends ResourceAbstract {
         return link.data || null;
     }
 
+    /**
+     * fetchPhoto
+     * fetch photo resource from graph
+     * @param  {[Int]} id
+     * @return {[Object|null]}
+     */
     fetchPhoto(id) {
         var photoResource = new PhotoResource(id);
         var photo = photoResource.fetchAll();
@@ -112,6 +136,12 @@ export class FeedResource extends ResourceAbstract {
         return photo.data || null;
     }
 
+    /**
+     * fetchVideo
+     * fetch video resource from graph
+     * @param  {[Int]} id
+     * @return {[Object|null]}
+     */
     fetchVideo(id) {
         var videoResource = new VideoResource(id);
         var video = videoResource.fetchAll();
@@ -124,6 +154,12 @@ export class FeedResource extends ResourceAbstract {
         return video.data || null;
     }
 
+    /**
+     * fetchEvent
+     * fetch event resource from graph
+     * @param  {[Int]} id
+     * @return {[Object|null]}
+     */
     fetchEvent(id) {
         var eventResource = new EventResource(id);
         var event = eventResource.fetchAll();
@@ -165,7 +201,12 @@ export class FeedResource extends ResourceAbstract {
             }
             try {
                 Feed.insert(feed);
-            } catch (e) { }
+            } catch (e) {
+                if ( e.code === 11000 ) {
+                    this.continueToFetch = false;
+                    return response;
+                }
+            }
         }
         return response;
     }
