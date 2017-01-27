@@ -73,9 +73,6 @@ export class ResourceAbstract {
      * @return {object|null} [facebook graph api response]
      */
     fetchAll(route = null, params = null) {
-        if (this.continueToFetch === false) {
-            return {};
-        }
         if (route === null) {
             route = this.route;
         }
@@ -109,7 +106,7 @@ export class ResourceAbstract {
         }
         this.fetchAll();
         limit--;
-        while (typeof this.responsePaging !== "undefined" && limit !== 0 && this.continueToFetch === true) {
+        while ( typeof this.responsePaging !== "undefined" && limit !== 0 && this.continueToFetch === true ) {
             this.paginateNext();
             limit--;
         }

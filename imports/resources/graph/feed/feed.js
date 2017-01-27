@@ -64,11 +64,6 @@ export class FeedResource extends ResourceAbstract {
             if (typeof response.data.data[i].id === "undefined") {
                 continue ;
             }
-            var entity = Feed.findOne({feed_id: response.data.data[i].id});
-            if (typeof entity !== "undefined") {
-                this.continueToFetch = false;
-                continue ;
-            }
             var objectId = this.fetchObjectId(response.data.data[i].id);
             if (objectId !== null) {
                 response.data.data[i].object_id = objectId;
@@ -179,16 +174,13 @@ export class FeedResource extends ResourceAbstract {
      */
     saveResponse(response) {
         response = super.saveResponse(response);
-        if (this.continueToFetch === false) {
-            return response;
-        }
         for (var i = response.data.data.length - 1; i >= 0; i--) {
             if ( typeof response.data.data[i].id === "undefined" ) {
                 continue ;
             }
             if ( this.isUnique( response.data.data[i].id ) === false ) {
                 this.continueToFetch = false;
-                return response ;
+                continue ;
             }
             var feed = this.formatFeed( response.data.data[i] )
             try {
