@@ -70,7 +70,7 @@ export class ResourceAbstract {
      * fetchAll
      * @param  {string|null} route [facebook graph api route] optional
      * @param  {object|null} params [description] optional
-     * @return {object} [facebook graph api response]
+     * @return {object|null} [facebook graph api response]
      */
     fetchAll(route = null, params = null) {
         if (this.continueToFetch === false) {
@@ -91,6 +91,9 @@ export class ResourceAbstract {
         } catch (e) {
             console.error(e);
             console.error("- Http Error - " + e.message);
+        }
+        if (typeof response === "undefined") {
+            return null;
         }
         return this.saveResponse(response);
     }

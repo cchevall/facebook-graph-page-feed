@@ -56,7 +56,8 @@ export class FeedResource extends ResourceAbstract {
      * @return {[object]} response
      */
     mergeData(response) {
-        if (typeof response.data === "undefined" || typeof response.data.data === "undefined") {
+        if (typeof response.data === "undefined"
+            || typeof response.data.data === "undefined") {
             return response;
         }
         for (var i = response.data.data.length - 1; i >= 0; i--) {
