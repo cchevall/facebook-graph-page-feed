@@ -1,6 +1,6 @@
 Package.describe({
   name: 'cchevallay:facebook-graph-page-feed',
-  version: '0.1.4',
+  version: '0.1.5',
   summary: './README.md',
   git: 'https://github.com/cchevall/facebook-graph-page-feed.git',
   documentation: 'README.md'
