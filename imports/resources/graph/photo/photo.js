@@ -15,6 +15,7 @@ export class PhotoResource extends ResourceAbstract {
                 "link",
                 "name",
                 "place",
+                "full_picture",
                 "likes.summary(true)",
                 "shares.summary(true)",
                 "comments.summary(true)"

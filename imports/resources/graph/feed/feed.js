@@ -6,6 +6,7 @@ import { StatusResource } from "../status/status.js";
 import { LinkResource } from "../link/link.js";
 import { EventResource } from "../event/event.js";
 import { PhotoResource } from "../photo/photo.js";
+import { PictureResource } from "../picture/picture.js";
 import { VideoResource } from "../video/video.js";
 import { MongoCollection as Feed } from "meteor/cchevallay:facebook-graph-page-feed/imports/collections/graph-api/feed/feed.js";
 
@@ -129,6 +130,18 @@ export class FeedResource extends ResourceAbstract {
             photo.data.comments.data = {};
         }
         return photo.data || null;
+    }
+
+    /**
+     * fetchPicture
+     * fetch photo resource from graph
+     * @param  {[Int]} id
+     * @return {[Object|null]}
+     */
+    fetchPicture(id) {
+        var pictureResource = new PictureResource(id);
+        var picture = pictureResource.fetchAll();
+        return picture || null;
     }
 
     /**

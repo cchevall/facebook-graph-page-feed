@@ -173,7 +173,8 @@ export class ResourceAbstract {
         if (typeof response.content !== "undefined" && typeof response.data === "undefined") {
             this.content = response.content;
         }
-        if (typeof response.data !== "undefined") {
+        if (typeof response.data !== "undefined"
+            && response.data !== null ) {
             this.responseData = response.data;
             this.responsePaging = response.data.paging;
         }
