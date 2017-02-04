@@ -6,9 +6,9 @@
         {{ #if message }}
             <p class="pre" >{{ message }}</p>
         {{ /if }}
-        <p>{{ feedDateFormat created_time }}</p>
+        <p>{{ dateFormat created_time }}</p>
         <a target="_blank" href="{{ photoResource.link }}">
-            <img alt="{{ #if photoResource.name }}{{ photoResource.name }}{{ /if }}" title="{{ #if story }}{{ story }}{{ /if }}{{ #if message }}{{ message }}{{ /if }}" src="{{ image_url }}"/>
+            <img alt="{{ #if photoResource.name }}{{ photoResource.name }}{{ /if }}" title="{{ #if story }}{{ story }}{{ /if }}{{ #if message }}{{ message }}{{ /if }}" src="{{ photoResource.full_picture }}"/>
         </a>
         {{ #if photoResource.place }}
         <p>

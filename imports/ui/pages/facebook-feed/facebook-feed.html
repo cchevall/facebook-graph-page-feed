@@ -1,5 +1,5 @@
 <template name="facebookFeed">
-    <div id="facebook-feed" class="col-md-12">
+    <div id="facebook-feed" class="col-md-9 col-lg-9 col-sm-12 col-xs-12">
     {{ #each fetchAllFeed }}
         <article id="{{ feed_id }}" class="fecebook-feed">
             {{ #if isPhoto type }}
@@ -20,8 +20,8 @@
         </article>
     {{ /each }}
     {{#if moreResults}}
-        <div id="showMoreResults" style="margin-left: 25px;">
-            <span class="loading">Loading...</span>
+        <div id="showMoreResults" class="row" >
+            <div id="loading-round" class="loading-round"></div>
         </div>
     {{/if}}
     </div>

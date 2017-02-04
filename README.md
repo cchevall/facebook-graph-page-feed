@@ -1,16 +1,10 @@
-Sever side tools to get a facebook page feed from graph API.
+# Sever side tools to get a facebook page feed from graph API.
 
-settings.json exemple:
+# settings.json exemple:
 ```json
 {
-    "public" : {
-        "facebook-graph-page-feed" : {
-            "use-default-client-feed" : true,                   //optional
-            "facebook-feed-route" : "/my-feed-route"            //optional
-        }
-    },
     "facebook-graph-page-feed" : {
-        "fetch-limit" : 5,                                      //optional
+        "fetch-limit" : -1,                                      //optional
         "facebook-api-domain" : "https://graph.facebook.com/",
         "facebook-api-version" : "2.8",
         "facebook-page-id" : "facebookPageId",
@@ -20,19 +14,37 @@ settings.json exemple:
 }
 ```
 
-For custom implementation:
-
-on Client side:
-
+# On Client side:
+- route declaration with FlowRouter and BlazeLayout Packages (not included).
+```javascript
     import { FacebookPageFeed } from "meteor/cchevallay:facebook-graph-page-feed";
 
-    Meteor.subscribe( FacebookPageFeed.fetchAllFeedAlias )
+    var news = function () {
+        import '/imports/ui/common/newa/news.html';
+        BlazeLayout.render( "news" );
+    };
 
-    var options = {};
-    FacebookPageFeed.collection.find({}, options).fetch();
+    FlowRouter.route('/news', {
+        name: "news",
+        action: news,
+        subscriptions: function(params, queryParams) {
+            this.register(
+                FacebookPageFeed.fetchAllFeedAlias,
+                FacebookPageFeed.subscribe( {limit: 25} )
+            );
+        }
+    });
+```
+- template declaration
+```xml
+    <template name="news">
+        {{> facebookFeed }}
+    </template>
+```
 
-on Server side:
-
+# On Server side:
+```javascript
     import { FacebookPageFeed } from "meteor/cchevallay:facebook-graph-page-feed";
 
     FacebookPageFeed.publish();
+```

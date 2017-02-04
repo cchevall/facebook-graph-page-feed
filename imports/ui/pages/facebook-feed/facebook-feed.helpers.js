@@ -4,7 +4,7 @@ var helpers = {};
 
 helpers["fetchAllFeed"] = function ( ) {
 
-    var limit = typeof Session.get("FacebookFeedLimit") !== "undefined" ? Session.get("FacebookFeedLimit") : 1;
+    var limit = typeof Template.instance().limit.get() !== "undefined" ? Template.instance().limit.get() : 1;
     var scroll = {
         limit: limit
     };
@@ -39,7 +39,7 @@ helpers["isStatus"] = function ( type ) {
 
 helpers["moreResults"] = function( ) {
 
-    return !(FacebookPageFeed.collection.find().count() < Session.get("FacebookFeedLimit"));
+    return !(FacebookPageFeed.collection.find().count() < Template.instance().limit.get());
 }
 
 Template.facebookFeed.helpers(helpers);
