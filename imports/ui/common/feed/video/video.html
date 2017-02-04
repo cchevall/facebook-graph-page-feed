@@ -1,7 +1,7 @@
 <template name="videoFeed">
     <div class="videoFeed row">
         {{ #if created_time }}
-        <p>{{ dateFormat created_time }}</p>
+        <p>{{ feedDateFormat created_time }}</p>
         {{ /if }}
         {{ #if description }}
             <p class="pre" >{{ description }}</p>

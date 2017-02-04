@@ -6,7 +6,7 @@
         {{ #if message }}
             <p class="pre" >{{ message }}</p>
         {{ /if }}
-        <p>{{ dateFormat created_time }}</p>
+        <p>{{ feedDateFormat created_time }}</p>
         <a target="_blank" href="{{ eventResource.link }}">
             <img alt="{{ #if eventResource.name }}{{ eventResource.name }}{{ /if }}" title="{{ #if story }}{{ story }}{{ /if }}{{ #if message }}{{ message }}{{ /if }}" src="{{ image_url }}"/>
         </a>
