@@ -191,16 +191,26 @@ export class FeedResource extends ResourceAbstract {
             if ( typeof response.data.data[i].id === "undefined" ) {
                 continue ;
             }
-            if ( this.isUnique( response.data.data[i].id ) === false ) {
-                this.continueToFetch = false;
+            var feed = this.formatFeed( response.data.data[i] )
+            var oldFeed = Feed.findOne({feed_id: response.data.data[i].id});
+            if ( typeof oldFeed !== "undefined" ) {
+                this.updateFeed( oldFeed, feed );
                 continue ;
             }
-            var feed = this.formatFeed( response.data.data[i] )
             try {
                 Feed.insert(feed);
             } catch (e) { console.error( e.message ) }
         }
         return response;
+    }
+
+    updateFeed( oldFeed, newFeed ) {
+        if ( typeof newFeed.videoResource !== "undefined" ) {
+            Feed.update( {_id: oldFeed._id}, {$set: {source: newFeed.videoResource.source}} );
+        }
+        if ( typeof newFeed.photoResource !== "undefined" ) {
+            Feed.update( {_id: oldFeed._id}, {$set: {source: newFeed.photoResource.full_picture}} );
+        }
     }
 
     /**
