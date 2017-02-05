@@ -26,13 +26,7 @@
 
     FlowRouter.route('/news', {
         name: "news",
-        action: news,
-        subscriptions: function(params, queryParams) {
-            this.register(
-                FacebookPageFeed.fetchAllFeedAlias,
-                FacebookPageFeed.subscribe( {limit: 25} )
-            );
-        }
+        action: news
     });
 ```
 - template declaration
