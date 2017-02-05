@@ -105,6 +105,9 @@ export class FeedResource extends ResourceAbstract {
     fetchLink(id) {
         var linkResource = new LinkResource(id);
         var link = linkResource.fetchAll();
+        if ( link === null ) {
+            return null;
+        }
         if (typeof link.data.likes.data !== "Object") {
             link.data.likes.data = {};
         }
@@ -123,6 +126,9 @@ export class FeedResource extends ResourceAbstract {
     fetchPhoto(id) {
         var photoResource = new PhotoResource(id);
         var photo = photoResource.fetchAll();
+        if ( photo === null ) {
+            return null;
+        }
         if (typeof photo.data.likes.data !== "Object") {
             photo.data.likes.data = {};
         }
@@ -153,6 +159,9 @@ export class FeedResource extends ResourceAbstract {
     fetchVideo(id) {
         var videoResource = new VideoResource(id);
         var video = videoResource.fetchAll();
+        if ( video === null ) {
+            return null;
+        }
         if (typeof video.data.likes.data !== "Object") {
             video.data.likes.data = {};
         }
@@ -171,6 +180,9 @@ export class FeedResource extends ResourceAbstract {
     fetchEvent(id) {
         var eventResource = new EventResource(id);
         var event = eventResource.fetchAll();
+        if ( event === null ) {
+            return null;
+        }
         if (typeof event.data.likes.data !== "Object") {
             event.data.likes.data = {};
         }
@@ -256,6 +268,9 @@ export class FeedResource extends ResourceAbstract {
     fetchObjectId(id) {
         var objectIdResource = new ObjectIdResource(id);
         var objectRel = objectIdResource.fetchAll();
+        if ( objectRel === null ) {
+            return null;
+        }
         return objectRel.data.object_id || null;
     }
 

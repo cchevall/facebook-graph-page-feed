@@ -19,8 +19,14 @@
             {{/if}}
         </article>
     {{ /each }}
-    {{#if moreResults}}
-        <div id="showMoreResults" class="row" >
+    {{#if Template.subscriptionsReady}}
+        {{#if moreResults }}
+            <div id="showMoreResults" class="row" >
+                <div id="loading-round" class="loading-round"></div>
+            </div>
+        {{/if}}
+    {{else}}
+        <div class="row" >
             <div id="loading-round" class="loading-round"></div>
         </div>
     {{/if}}

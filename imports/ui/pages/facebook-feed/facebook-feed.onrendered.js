@@ -1,7 +1,6 @@
 
-var onScroll = function ( ) {
+var onScroll = function ( template ) {
 
-    var template = Template.instance( );
     $(window).scroll( function( ) {
         var showMoreElem = $("#showMoreResults");
         if (showMoreElem.length === 0) {
@@ -11,7 +10,7 @@ var onScroll = function ( ) {
         if (showMoreElem.offset().top < threshold) {
             if (!showMoreElem.data("visible")) {
                 showMoreElem.data("visible", true);
-                template.limit.set(template.limit.get( ) + 5);
+                template.limit.set(template.limit.get( ) + 10);
             }
         } else {
             if (showMoreElem.data("visible")) {
@@ -23,7 +22,8 @@ var onScroll = function ( ) {
 
 var onRendered = function ( ) {
 
-    onScroll( );
+    var template = Template.instance( );
+    onScroll( template );
 }
 
 Template.facebookFeed.onRendered( onRendered );

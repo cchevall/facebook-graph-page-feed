@@ -4,11 +4,7 @@ var helpers = {};
 
 helpers["fetchAllFeed"] = function ( ) {
 
-    var limit = typeof Template.instance().limit.get() !== "undefined" ? Template.instance().limit.get() : 1;
-    var scroll = {
-        limit: limit
-    };
-    var feed = FacebookPageFeed.collection.find({}, scroll).fetch();
+    var feed = FacebookPageFeed.collection.find({}, { limit: Template.instance( ).loaded.get( ) }).fetch();
     return feed;
 }
 
