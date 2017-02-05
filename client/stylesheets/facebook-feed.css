@@ -88,3 +88,44 @@
 #facebook-feed ul {
     list-style-type: none;
 }
+
+#facebook-photos-feed {
+}
+
+#facebook-photos-feed ul {
+  padding: 0;
+}
+
+#facebook-photos-feed p {
+  font-size: 2.2rem;
+}
+
+#facebook-photos-feed .photo-mosaic {
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  padding: 30px 50px 30px 50px;
+  margin-bottom: 20px;
+}
+
+#facebook-photos-feed .socialFeed {
+  margin-top: 10px;
+}
+
+#facebook-photos-feed .socialFeed .feed-meta li {
+  float: left;
+  margin-right: 15px;
+}
+
+#facebook-photos-feed .socialFeed .feed-meta a {
+  color: #AFB4BD;
+  font-size: 1.7rem;
+}
+
+#facebook-photos-feed .photo-mosaic img {
+  width: 100%;
+}
+
+#facebook-photos-feed .linkFeed img {
+  float: left;
+  margin-right: 20px;
+}

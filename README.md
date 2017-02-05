@@ -18,15 +18,26 @@
 - route declaration with FlowRouter and BlazeLayout Packages (not included).
 ```javascript
     import { FacebookPageFeed } from "meteor/cchevallay:facebook-graph-page-feed";
+    import { FacebookPhotosFeed } from "meteor/cchevallay:facebook-graph-page-feed";
 
     var news = function () {
-        import '/imports/ui/common/newa/news.html';
+        import '/imports/ui/common/news/news.html';
         BlazeLayout.render( "news" );
+    };
+
+    var photos = function () {
+        import '/imports/ui/common/photos/photos.html';
+        BlazeLayout.render( "photos" );
     };
 
     FlowRouter.route('/news', {
         name: "news",
         action: news
+    });
+
+    FlowRouter.route('/photos', {
+        name: "photos",
+        action: photos
     });
 ```
 - template declaration
@@ -34,11 +45,17 @@
     <template name="news">
         {{> facebookFeed }}
     </template>
+
+    <template name="photos">
+        {{> facebookPhotosFeed }}
+    </template>
 ```
 
 # On Server side:
 ```javascript
     import { FacebookPageFeed } from "meteor/cchevallay:facebook-graph-page-feed";
+    import { FacebookPhotosFeed } from "meteor/cchevallay:facebook-graph-page-feed";
 
     FacebookPageFeed.publish();
+    FacebookPhotosFeed.publish();
 ```
