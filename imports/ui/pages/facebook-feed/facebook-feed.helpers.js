@@ -4,7 +4,7 @@ var helpers = {};
 
 helpers["fetchAllFeed"] = function ( ) {
 
-    var feed = FacebookPageFeed.collection.find({}, { limit: Template.instance( ).loaded.get( ) }).fetch();
+    var feed = FacebookPageFeed.collection.find({}, { limit: Session.get("loadedPageFeed") }).fetch();
     return feed;
 }
 
@@ -35,7 +35,7 @@ helpers["isStatus"] = function ( type ) {
 
 helpers["moreResults"] = function( ) {
 
-    return !(FacebookPageFeed.collection.find().count() < Template.instance().limit.get());
+    return !(FacebookPageFeed.collection.find().count() < Session.get("limitPageFeed") );
 }
 
 Template.facebookFeed.helpers(helpers);

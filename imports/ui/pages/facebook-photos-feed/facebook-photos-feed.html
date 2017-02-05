@@ -1,0 +1,59 @@
+<template name="facebookPhotosFeed">
+    <div id="facebook-photos-feed" class="col-md-9 col-lg-9 col-sm-12 col-xs-12">
+    {{ #each fetchAllFeed }}
+        <div id="{{ photo_id }}" class="photo-mosaic row">
+            <p>{{ dateFormat created_time }}</p>
+            <p>{{ name }}</p>
+            <a target="_blank" href="{{ photoResource.link }}">
+                <img alt="{{ #if place }}{{ place }}{{ /if }}" title="{{ #if name }}{{ name }}{{ /if }}" src="{{ image_url }}"/>
+            </a>
+            {{ #if photoResource.place }}
+            <p>{{ formatPlace place }}</p>
+            {{ /if }}
+            <div class="socialFeed">
+                <ul class="feed-meta light">
+                    <li class="cf-likes">
+                        <a target="_blank" href="{{ link }}"><span class="glyphicon glyphicon-thumbs-up"></span>
+                        {{ #if likes.summary.total_count }}
+                            <span class="feed-count">{{ likes.summary.total_count }}</span>
+                        {{ else }}
+                            <span class="feed-count">0</span>
+                        {{ /if }}
+                        </a>
+                    </li>
+                    <li class="cf-shares">
+                        <a target="_blank" href="{{ link }}"><span class="glyphicon glyphicon-share"></span>
+                        {{ #if shares.count }}
+                            <span class="feed-count">{{ shares.count }}</span>
+                        {{ else }}
+                            <span class="feed-count">0</span>
+                        {{ /if }}
+                        </a>
+                    </li>
+                    <li class="feed-comments">
+                        <a target="_blank" href="{{ link }}">
+                            <span class="glyphicon glyphicon-comment"></span>
+                        {{ #if comments.summary.total_count }}
+                            <span class="feed-count">{{ comments.summary.total_count }}</span>
+                        {{ else }}
+                            <span class="feed-count">0</span>
+                        {{ /if }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {{ /each }}
+    {{#if Template.subscriptionsReady}}
+        {{#if moreResults }}
+            <div id="showMoreResults" class="row" >
+                <div id="loading-round" class="loading-round"></div>
+            </div>
+        {{/if}}
+    {{else}}
+        <div class="row" >
+            <div id="loading-round" class="loading-round"></div>
+        </div>
+    {{/if}}
+    </div>
+</template>

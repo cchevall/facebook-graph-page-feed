@@ -24,9 +24,19 @@ export const FetchAllFeedAlias = CollectionName + "FetchAllFeed";
  */
 export var FetchAllFeedMethod = function (options = {}) {
 
+    var ceil = typeof options.limit === "undefined" ? 1 : options.limit;
     options.sort = typeof options.sort !== "undefined" ? options.sort : [["created_time", "desc"]];
     var data = MongoCollection.find({}, options);
-    Meteor.defer(updateFeed);
+    var limit = 1;
+    if (typeof Meteor.settings["facebook-graph-page-feed"]["fetch-limit"] !== "undefined") {
+        limit = Meteor.settings["facebook-graph-page-feed"]["fetch-limit"];
+    }
+    if ( ceil <= limit || limit === -1 ) {
+        Meteor.defer( function ( ) {
+            var feedResource = new PhotosFeedResource();
+            feedResource.fetchAllHalCollection(limit);
+        } );
+    }
     if (data) {
         return data;
     }
