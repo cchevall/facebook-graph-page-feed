@@ -106,7 +106,7 @@ export class ResourceAbstract {
         }
         this.fetchAll();
         limit--;
-        while ( typeof this.responsePaging !== "undefined" && limit !== 0 && this.continueToFetch === true ) {
+        while ( typeof this.responsePaging !== "undefined" && limit !== 0 ) {
             this.paginateNext();
             limit--;
         }
