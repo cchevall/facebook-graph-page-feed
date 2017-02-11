@@ -73,10 +73,10 @@ export class ResourceAbstract {
      * @return {object|null} [facebook graph api response]
      */
     fetchAll(route = null, params = null) {
-        if (route === null) {
+        if ( route === null ) {
             route = this.route;
         }
-        if (params === null) {
+        if ( params === null ) {
             params = this.params;
         }
         try {
@@ -88,6 +88,7 @@ export class ResourceAbstract {
         } catch (e) {
             console.error(e);
             console.error("- Http Error - " + e.message);
+            return null;
         }
         if (typeof response === "undefined") {
             return null;
@@ -107,7 +108,9 @@ export class ResourceAbstract {
         this.fetchAll();
         limit--;
         while ( typeof this.responsePaging !== "undefined" && limit !== 0 ) {
-            this.paginateNext();
+            if ( this.paginateNext() === null ) {
+                return ;
+            }
             limit--;
         }
     }
@@ -120,7 +123,7 @@ export class ResourceAbstract {
         if (typeof this.responsePaging === "undefined") {
             return this.fetchAll();
         }
-        return this.fetchAll(this.responsePaging.next, {});
+        return this.fetchAll(this.responsePaging.next);
     }
 
     /**
@@ -131,7 +134,7 @@ export class ResourceAbstract {
         if (typeof this.responsePaging === "undefined") {
             return this.fetchAll();
         }
-        return this.fetchAll(this.responsePaging.previous, {});
+        return this.fetchAll(this.responsePaging.previous);
     }
 
     /**
