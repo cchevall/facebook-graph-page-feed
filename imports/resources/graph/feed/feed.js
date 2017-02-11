@@ -218,7 +218,6 @@ export class FeedResource extends ResourceAbstract {
 
     updateFeed( oldFeed, newFeed ) {
         if ( typeof newFeed.videoResource !== "undefined" ) {
-            console.log(newFeed);
             Feed.update( { _id: oldFeed._id }, { $set: { videoResource: { source: newFeed.videoResource.source } } } );
         }
         if ( typeof newFeed.photoResource !== "undefined" ) {
