@@ -83,6 +83,7 @@
 #facebook-feed article .linkFeed img {
     float: left;
     margin-right: 20px;
+    max-width: 50%;
 }
 
 #facebook-feed ul {

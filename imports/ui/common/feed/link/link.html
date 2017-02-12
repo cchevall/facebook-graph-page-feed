@@ -2,9 +2,11 @@
     <div class="linkFeed row">
         <p class="pre">{{ linkResource.message }}</p>
         <div>
+            {{ #if linkResource.full_picture }}
             <a target="_blank" href="{{ linkResource.link }}">
-                <img src="{{ linkResource.picture }}"/>
+                <img src="{{ linkResource.full_picture }}"/>
             </a>
+            {{ /if }}
             <p><a target="_blank" href="{{ linkResource.link }}">{{ linkResource.name }}</a></p>
             <p>{{ linkResource.description }}</p>
         </div>

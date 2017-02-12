@@ -17,7 +17,7 @@ export class LinkResource extends ResourceAbstract {
                 "link",
                 "message",
                 "name",
-                "picture",
+                "full_picture",
                 "likes.summary(true)",
                 "shares.summary(true)",
                 "comments.summary(true)"
