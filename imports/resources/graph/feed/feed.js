@@ -216,13 +216,15 @@ export class FeedResource extends ResourceAbstract {
         return response;
     }
 
+    /**
+     * updateFeed
+     * @param  {object} oldFeed
+     * @param  {object} newFeed
+     */
     updateFeed( oldFeed, newFeed ) {
-        if ( typeof newFeed.videoResource !== "undefined" ) {
-            Feed.update( { _id: oldFeed._id }, { $set: { videoResource: { source: newFeed.videoResource.source } } } );
-        }
-        if ( typeof newFeed.photoResource !== "undefined" ) {
-            Feed.update( { _id: oldFeed._id }, { $set: { photoResource: { full_picture: newFeed.photoResource.full_picture } } } );
-        }
+        try {
+            Feed.update( { _id: oldFeed._id }, { $set: newFeed } );
+        } catch (e) { console.error( e.message ) }
     }
 
     /**

@@ -55,16 +55,28 @@ export class PhotosFeedResource extends ResourceAbstract {
             if ( typeof response.data.data[i].id === "undefined" ) {
                 continue ;
             }
-            if ( this.isUnique( response.data.data[i].id ) === false ) {
-                this.continueToFetch = false;
-                return response ;
+            var feed = this.formatPhotosFeed( response.data.data[i] );
+            var oldFeed = PhotosFeed.findOne({photo_id: response.data.data[i].id});
+            if ( typeof oldFeed !== "undefined" ) {
+                this.updatePhotosFeed( oldFeed, feed );
+                continue ;
             }
-            var feed = this.formatPhotosFeed( response.data.data[i] )
             try {
                 PhotosFeed.insert(feed);
             } catch (e) { console.error( e.message ) }
         }
         return response;
+    }
+
+    /**
+     * updatePhotosFeed
+     * @param  {object} oldFeed
+     * @param  {object} newFeed
+     */
+    updatePhotosFeed( oldFeed, newFeed ) {
+        try {
+            PhotosFeed.update( { _id: oldFeed._id }, { $set: newFeed } );
+        } catch (e) { console.error( e.message ) }
     }
 
     /**
