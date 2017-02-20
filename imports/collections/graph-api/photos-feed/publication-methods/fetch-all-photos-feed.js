@@ -4,15 +4,6 @@ import { Meteor } from 'meteor/meteor';
 import { CollectionName, MongoCollection } from "../photos-feed.js";
 import { PhotosFeedResource } from "meteor/cchevallay:facebook-graph-page-feed/imports/resources/graph/photos-feed/photos-feed.js";
 
-var updateFeed = function () {
-    var limit = 1;
-    if (typeof Meteor.settings["facebook-graph-page-feed"]["fetch-limit"] !== "undefined") {
-        var limit = Meteor.settings["facebook-graph-page-feed"]["fetch-limit"];
-    }
-    var feedResource = new PhotosFeedResource();
-    feedResource.fetchAllHalCollection(limit);
-}
-
 /**
  * FetchAllFeedAlias
  * @type {string}
@@ -24,7 +15,7 @@ export const FetchAllFeedAlias = CollectionName + "FetchAllFeed";
  */
 export var FetchAllFeedMethod = function (options = {}) {
 
-    var ceil = typeof options.limit === "undefined" ? 1 : options.limit;
+    var ceil = typeof options.limit === "undefined" ? 1 : Math.ceil(options.limit / 25);
     options.sort = typeof options.sort !== "undefined" ? options.sort : [["created_time", "desc"]];
     var data = MongoCollection.find({}, options);
     var limit = 1;
@@ -33,12 +24,12 @@ export var FetchAllFeedMethod = function (options = {}) {
     }
     if ( ceil <= limit || limit === -1 ) {
         Meteor.defer( function ( ) {
-            var feedResource = new PhotosFeedResource();
-            feedResource.fetchAllHalCollection(limit);
+            var feedResource = new PhotosFeedResource( );
+            feedResource.fetchAllHalCollection( ceil );
         } );
     }
-    if (data) {
+    if ( data ) {
         return data;
     }
-    return this.ready();
+    return this.ready( );
 };
