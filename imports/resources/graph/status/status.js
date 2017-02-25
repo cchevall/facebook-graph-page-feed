@@ -9,16 +9,9 @@ export class StatusResource extends ResourceAbstract {
      * @param  {String} statusId
      */
     constructor(statusId = "") {
+        var fields = [ "created_time", "message", "name", "place", "likes.summary(true)", "shares.summary(true)", "comments.summary(true)" ].join(',');
         var params = {
-            fields: [
-                "created_time",
-                "message",
-                "name",
-                "place",
-                "likes.summary(true)",
-                "shares.summary(true)",
-                "comments.summary(true)"
-            ]
+            fields: fields
         };
         super(params);
         this.buildRoute(statusId);

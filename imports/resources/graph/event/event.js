@@ -9,14 +9,9 @@ export class EventResource extends ResourceAbstract {
      * @param  {String} eventId
      */
     constructor(eventId = "") {
+        var fields = [ "description", "name", "link", "likes.summary(true)", "comments.summary(true)" ].join(',');
         var params = {
-            fields: [
-                "description",
-                "name",
-                "link",
-                "likes.summary(true)",
-                "comments.summary(true)"
-            ]
+            fields: fields
         };
         super(params);
         this.buildRoute(eventId);

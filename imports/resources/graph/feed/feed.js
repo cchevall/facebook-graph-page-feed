@@ -17,13 +17,9 @@ import { MongoCollection as Feed } from "meteor/cchevallay:facebook-graph-page-f
 export class FeedResource extends ResourceAbstract {
 
     constructor() {
+        var fields = [ "type", "story", "message", "created_time" ].join(',');
         var params = {
-            fields: [
-                "type",
-                "story",
-                "message",
-                "created_time"
-            ]
+            fields: fields
         };
         super(params);
         this.fetchMethods = {

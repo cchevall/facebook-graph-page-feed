@@ -9,19 +9,9 @@ export class LinkResource extends ResourceAbstract {
      * @param  {String} linkId
      */
     constructor(linkId = "") {
+        var fields = [ "created_time", "description", "from", "link", "message", "name", "full_picture", "likes.summary(true)", "shares.summary(true)", "comments.summary(true)" ].join(',');
         var params = {
-            fields: [
-                "created_time",
-                "description",
-                "from",
-                "link",
-                "message",
-                "name",
-                "full_picture",
-                "likes.summary(true)",
-                "shares.summary(true)",
-                "comments.summary(true)"
-            ]
+            fields: fields
         };
         super(params);
         this.buildRoute(linkId);

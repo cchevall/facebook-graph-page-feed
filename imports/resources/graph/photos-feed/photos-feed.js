@@ -10,19 +10,10 @@ import { MongoCollection as PhotosFeed } from "meteor/cchevallay:facebook-graph-
 export class PhotosFeedResource extends ResourceAbstract {
 
     constructor() {
+        var fields = [ "created_time", "link", "name", "picture", "place", "likes.summary(true)", "comments.summary(true)" ].join(',');
         var params = {
-            fields: [
-                "created_time",
-                "link",
-                "name",
-                "picture",
-                "place",
-                "likes.summary(true)",
-                "comments.summary(true)"
-            ],
-            type: [
-                "uploaded"
-            ]
+            fields: fields,
+            type: "uploaded"
         };
         super(params);
         this.initFacebookPage();

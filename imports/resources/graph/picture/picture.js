@@ -9,10 +9,9 @@ export class PictureResource extends ResourceAbstract {
      * @param  {String} objectId
      */
     constructor(objectId = "") {
+        var fields = [ "large" ].join(',');
         var params = {
-            fields: [
-                "large"
-            ]
+            fields: fields
         };
         super(params);
         this.buildRoute(objectId);
