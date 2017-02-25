@@ -1,7 +1,7 @@
 Package.describe({
   name: 'cchevallay:facebook-graph-page-feed',
-  version: '0.1.20',
-  summary: './README.md',
+  version: '0.1.21',
+  summary: 'Add your Facebook Page Feed on your application easily.',
   git: 'https://github.com/cchevall/facebook-graph-page-feed.git',
   documentation: 'README.md'
 });
