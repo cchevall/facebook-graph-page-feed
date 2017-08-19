@@ -1,6 +1,6 @@
 Package.describe({
   name: 'cchevallay:facebook-graph-page-feed',
-  version: '0.1.21',
+  version: '0.1.22',
   summary: 'Add your Facebook Page Feed on your application easily.',
   git: 'https://github.com/cchevall/facebook-graph-page-feed.git',
   documentation: 'README.md'
@@ -12,7 +12,6 @@ Package.onUse(function(api) {
   api.use('templating@1.2.15', 'client');
   api.use('momentjs:moment@2.17.1', 'client');
   api.use('twbs:bootstrap@3.3.6', 'client');
-  api.use("aldeed:collection2@2.10.0");
   api.use('http');
   api.mainModule('./client/main.js', 'client');
   api.mainModule('./server/main.js', 'server');
